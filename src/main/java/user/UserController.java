@@ -7,7 +7,7 @@ public class UserController {
 
 
 	private UserService userService;
-	
+	private String string;
 	
 	public UserController(String username, String password) {
 		this.userService = new UserService(username, password);
