@@ -5,19 +5,19 @@ import java.util.Date;
 public class Contact {
 
 	
-	private Date date;
+	private String date;
 	private String procedure;
 	private String description;
-	public Contact(Date date, String procedure, String description) {
+	public Contact(String date, String procedure, String description) {
 		super();
 		this.date = date;
 		this.procedure = procedure;
 		this.description = description;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getProcedure() {

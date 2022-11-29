@@ -20,7 +20,10 @@ public class UserService {
 		}
 		
 		return flag;
-		
-		
+	}
+	public static boolean addCustomer(String name, String email, String nameCompany, String position, String date, String procedure,
+			String description) {
+		//TODO Implement
+		return false;
 	}
 }

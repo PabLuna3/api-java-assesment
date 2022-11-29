@@ -40,4 +40,14 @@ class UserTest {
 		
 		assertEquals(false, validUser.ValidateLogin("pablo@solera", ""));
 	}
+	
+	@Test
+	void createCustomer() {
+		
+		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		//addCustomer has to recieve all the information about the customer, and the information about the first Contact.
+		
+		assertEquals(true,validUser.addCustomer("Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		
+	}
 }

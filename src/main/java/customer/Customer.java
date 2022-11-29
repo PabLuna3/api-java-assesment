@@ -17,7 +17,7 @@ public class Customer {
 	
 	
 	
-	public Customer(String name, String email, String nameCompany, String position, Date date, String procedure,
+	public Customer(String name, String email, String nameCompany, String position, String date, String procedure,
 			String description) {
 		super();
 		this.name = name;
