@@ -1,4 +1,8 @@
-package company;
+package com.api.assessment.pack.company;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 public class Company {
 
