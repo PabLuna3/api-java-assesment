@@ -22,4 +22,22 @@ class UserTest {
 		assertEquals(true, validUser.ValidateLogin("pablo@solera", "haSvd12863tx"));
 	}
 
+	
+	@Test
+	void LoginUserNameEmpty() {
+		//A valid username in the system will be "pablo@solera" with a password "haSvd12863tx."
+		
+		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		
+		assertEquals(false, validUser.ValidateLogin("", "haSvd12863tx"));
+	}
+	
+	@Test
+	void LoginPasswordEmpty() {
+		//A valid username in the system will be "pablo@solera" with a password "haSvd12863tx."
+		
+		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		
+		assertEquals(false, validUser.ValidateLogin("pablo@solera", ""));
+	}
 }
