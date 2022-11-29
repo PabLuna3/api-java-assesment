@@ -19,7 +19,7 @@ class UserTest {
 		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
 		
 		assertEquals(false, validUser.ValidateLogin("pablo@soltera", "1234"));
-		assertEquals(true, validUser.ValidateLogin("pablo@soltera", "haSvd12863tx"));
+		assertEquals(true, validUser.ValidateLogin("pablo@solera", "haSvd12863tx"));
 	}
 
 }
