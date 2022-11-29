@@ -65,4 +65,15 @@ class UserTest {
 		assertEquals(true, validUser.addCustomer("pablo@solera", "Manolo", "manolo@email", "solera", "HR", "29-11-2022", "Phone Call", ""));
 		
 	}
+	//In the case there is a new opportunity with the same email as a current opportunity/customer, 
+	//we add the contact to the existing opportunity/customer.
+	//In this test, we have one opportunity with one contact. After a new call to addCustomer,
+	// that customer will have 2 contacts.
+	@Test
+	void createCustomerWithSameEmail() {
+		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware");
+		assertEquals(true, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "30-11-2022", "Phone Call", "Talked about prices"));
+		assertEquals(2, validUser.getCustomers("pablo@solera").get(0).numberOfContacts());
+	}
 }

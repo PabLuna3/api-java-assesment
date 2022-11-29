@@ -31,4 +31,8 @@ public class Customer {
 	public String getName() {
 		return name;
 	}
+	
+	public int numberOfContacts() {
+		return contacts.size();
+	}
 }
