@@ -1,18 +1,20 @@
 package user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserService {
 
 	
-	private User user;
+	private List<User> users = new ArrayList<>();
 	
 	public UserService(String username, String password) {
-		user = new User(username, password);
+		users.add( new User(username, password));
 	}
 	
 	
-	public boolean ValidateLogin(String username, String password) {
-		
-		//return ((user.getUsername().equals(username)) && (user.getPassword().equals(password))) ? true : false;
+	public static boolean ValidateLogin(String username, String password) {
+		//Implement
 		return true;
 		
 	}
