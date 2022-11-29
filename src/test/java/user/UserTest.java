@@ -73,7 +73,8 @@ class UserTest {
 	void createCustomerWithSameEmail() {
 		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
 		validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware");
-		assertEquals(true, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "30-11-2022", "Phone Call", "Talked about prices"));
+		assertEquals(1, validUser.getCustomers("pablo@solera").get(0).numberOfContacts());
+		validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "30-11-2022", "Phone Call", "Talked about prices");
 		assertEquals(2, validUser.getCustomers("pablo@solera").get(0).numberOfContacts());
 	}
 }

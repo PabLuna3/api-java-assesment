@@ -31,7 +31,12 @@ public class Customer {
 	public String getName() {
 		return name;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public void addContact(String date, String procedure, String description) {
+		contacts.add(new Contact(date,procedure,description));
+	}
 	public int numberOfContacts() {
 		return contacts.size();
 	}

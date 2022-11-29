@@ -39,10 +39,14 @@ public class UserService {
 				String temp = users.get(i).getUsername();
 				if(temp.equals(userName)) {
 					User tempUser = users.get(i);
-					Customer tempCustomer = new Customer(name,email,nameCompany, position, date, procedure, description);
-					tempUser.setCustomers(new Customer(name,email,nameCompany, position, date, procedure, description));
+					if (this.checkExistingEmail(tempUser, email)) {
+						tempUser.getCustomers().get(i).addContact(date, procedure, description);
+					}else {
+						Customer tempCustomer = new Customer(name,email,nameCompany, position, date, procedure, description);
+						tempUser.setCustomers(new Customer(name,email,nameCompany, position, date, procedure, description));
+						
+					}
 					users.set(i, tempUser);
-			
 				}
 			}
 		}
@@ -65,5 +69,14 @@ public class UserService {
 			}
 		}
 		return counter;
+	}
+	
+	public boolean checkExistingEmail(User user, String email) {
+		boolean flag = false;
+		for(int i = 0; i < user.getCustomers().size(); i++) {
+			if(user.getCustomers().get(i).getEmail().equals(email)) flag = true;
+		}
+		
+		return flag;
 	}
 }
