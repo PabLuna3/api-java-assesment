@@ -44,11 +44,25 @@ class UserTest {
 	@Test
 	void createCustomer() {
 		
-		UserService validUser2 =  new UserService("pablo@solera", "haSvd12863tx");
-		//addCustomer has to recieve all the information about the customer, and the information about the first Contact.
-		assertEquals(0, validUser2.numberOfCustomers("pablo@solera"));
-		assertEquals(true, validUser2.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
-		assertEquals("Antonio", validUser2.getCustomers("pablo@solera").get(0).getName());
+		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		//addCustomer has to receive all the information about the customer, and the information about the first Contact.
+		assertEquals(0, validUser.numberOfCustomers("pablo@solera"));
+		assertEquals(true, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals("Antonio", validUser.getCustomers("pablo@solera").get(0).getName());
+		
+	}
+	@Test
+	void createCustomerEmptyFields(){
+		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		validUser.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware");
+		assertEquals(false, validUser.addCustomer("pablo@solera", "", "antonio@email", "solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals(false, validUser.addCustomer("pablo@solera", "Antonio", "", "solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals(false, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email", "", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals(false, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email", "solera", "", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals(false, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email", "solera", "HR", "", "Phone Call", "Talked about new hardware"));
+		assertEquals(false, validUser.addCustomer("pablo@solera", "Antonio", "antonio@email", "solera", "HR", "29-11-2022", "", "Talked about new hardware"));
+		assertEquals(1, validUser.numberOfCustomers("pablo@solera"));
+		assertEquals(true, validUser.addCustomer("pablo@solera", "Manolo", "manolo@email", "solera", "HR", "29-11-2022", "Phone Call", ""));
 		
 	}
 }
