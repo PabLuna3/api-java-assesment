@@ -23,6 +23,7 @@ public class Customer {
 		this.name = name;
 		this.email = email;
 		this.company = new Company(nameCompany, position);
+		this.isCustomer = false;
 		this.contacts.add(new Contact(date, procedure, description));
 	}
 }
