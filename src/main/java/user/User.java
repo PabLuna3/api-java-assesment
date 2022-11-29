@@ -38,8 +38,8 @@ public class User {
 		return customers;
 	}
 
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
+	public void setCustomers(Customer customers) {
+		this.customers.add(customers);
 	}
 	
 }

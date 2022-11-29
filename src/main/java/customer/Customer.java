@@ -1,5 +1,6 @@
 package customer;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Customer {
 	private String email;
 	private Company company;
 	private boolean isCustomer;
-	private List<Contact> contacts;
+	private List<Contact> contacts = new ArrayList<>();
 	
 	
 	
@@ -25,5 +26,9 @@ public class Customer {
 		this.company = new Company(nameCompany, position);
 		this.isCustomer = false;
 		this.contacts.add(new Contact(date, procedure, description));
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

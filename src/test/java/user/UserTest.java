@@ -44,10 +44,11 @@ class UserTest {
 	@Test
 	void createCustomer() {
 		
-		UserService validUser =  new UserService("pablo@solera", "haSvd12863tx");
+		UserService validUser2 =  new UserService("pablo@solera", "haSvd12863tx");
 		//addCustomer has to recieve all the information about the customer, and the information about the first Contact.
-		
-		assertEquals(true,validUser.addCustomer("Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals(0, validUser2.numberOfCustomers("pablo@solera"));
+		assertEquals(true, validUser2.addCustomer("pablo@solera", "Antonio", "antonio@email","solera", "HR", "29-11-2022", "Phone Call", "Talked about new hardware"));
+		assertEquals("Antonio", validUser2.getCustomers("pablo@solera").get(0).getName());
 		
 	}
 }
