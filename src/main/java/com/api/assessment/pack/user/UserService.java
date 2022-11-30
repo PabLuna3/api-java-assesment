@@ -100,14 +100,13 @@ public class UserService {
 		if(date == null || date.isEmpty() || date.trim().isEmpty()) flag = false;
 		if(procedure == null || procedure.isEmpty() || procedure.trim().isEmpty()) flag = false;
 		
-		if(flag) {
-			List<Customer> customers = getCustomers(username);
-			for(int i = 0; i < customers.size(); i++) {
-				if(customers.get(i).getEmail().equals(email)) {
-					customers.get(i).getContacts().add(new Contact(date, procedure, description));
-				}
-			}
+		Customer tempCustomer = getCustomer(username,email);
+		if(tempCustomer != null) {
+			tempCustomer.getContacts().add(new Contact(date, procedure, description));
+		}else {
+			flag = false;
 		}
+		
 		return flag;
 	}
 	
@@ -139,8 +138,11 @@ public class UserService {
 		}
 		return null;
 	}
-	public void turnOpportunityIntoClient(String username, String emailCustomer) {
-		getCustomer(username, emailCustomer).setCustomer(true);
+	public boolean turnOpportunityIntoClient(String username, String emailCustomer) {
+		Customer tempCustomer = getCustomer(username, emailCustomer);
+		if(tempCustomer == null) return false;
+		tempCustomer.setCustomer(true);
+		return true;
 	}
 	
 	public boolean deleteCustomer(String username, String emailCustomer) {
@@ -157,12 +159,17 @@ public class UserService {
 	
 	public boolean deleteContact(String username, String emailCustomer, Contact contact) {
 		Customer tempCustomer = getCustomer(username, emailCustomer);
-		for(int i = 0; i < tempCustomer.getContacts().size(); i++) {
-			if(tempCustomer.getContacts().get(i).equals(contact)) {
-				tempCustomer.getContacts().remove(i);
-				return true;
+		if(tempCustomer != null) {
+			for(int i = 0; i < tempCustomer.getContacts().size(); i++) {
+				if(tempCustomer.getContacts().get(i).equals(contact)) {
+					tempCustomer.getContacts().remove(i);
+					if(tempCustomer.getContacts().size() == 0) {
+						deleteCustomer(username, emailCustomer);
+					}
+					return true;
+				}
+				
 			}
-			
 		}
 		return false;
 	}

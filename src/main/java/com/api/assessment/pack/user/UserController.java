@@ -3,6 +3,8 @@ package com.api.assessment.pack.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +32,12 @@ public class UserController {
 	
 	}
 	@GetMapping("/api/users/{username}")
-	public User getUser(@PathVariable String username) {
-		return userService.getUser(username);
+	public ResponseEntity<User> getUser(@PathVariable String username) {
+		User tempUser = userService.getUser(username);
+		if(tempUser != null) {
+			return new ResponseEntity <>(tempUser, HttpStatus.OK);
+		}
+		return new ResponseEntity <>(HttpStatus.BAD_REQUEST);
 	}
 	@GetMapping("/api/users/{username}/opportunities")
 	public List<Customer> getOpportunities(@PathVariable String username){
