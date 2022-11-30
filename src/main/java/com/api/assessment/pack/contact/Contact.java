@@ -40,4 +40,8 @@ public class Contact {
 	public String toString() {
 		return "Contacto : " + date + ", " + procedure + ", " + description; 
 	}
+	public boolean equals(Contact contact) {
+		return this.date.equals(contact.getDate()) && this.procedure.equals(contact.getProcedure()) 
+				&& this.description.equals(contact.getDescription());
+	}
 }

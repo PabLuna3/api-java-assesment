@@ -110,4 +110,60 @@ public class UserService {
 		}
 		return flag;
 	}
+	
+	public List<Customer> getOpportunities(String username){
+		User tempUser = getUser(username);
+		List<Customer> customers = new ArrayList<>();
+		
+		for(int i = 0; i < tempUser.getCustomers().size(); i++) {
+			if(!tempUser.getCustomers().get(i).isCustomer()) customers.add(tempUser.getCustomers().get(i));
+		}
+		
+		return customers;
+	}
+	public List<Customer> getClients(String username){
+		User tempUser = getUser(username);
+		List<Customer> clients = new ArrayList<>();
+		
+		for(int i = 0; i < tempUser.getCustomers().size(); i++) {
+			if(tempUser.getCustomers().get(i).isCustomer()) clients.add(tempUser.getCustomers().get(i));
+		}
+		
+		return clients;
+	}
+	public Customer getCustomer(String username, String emailCustomer) {
+		User tempUser = getUser(username);
+		
+		for(int i = 0; i < tempUser.getCustomers().size(); i++) {
+			if(tempUser.getCustomers().get(i).getEmail().equals(emailCustomer)) return tempUser.getCustomers().get(i);
+		}
+		return null;
+	}
+	public void turnOpportunityIntoClient(String username, String emailCustomer) {
+		getCustomer(username, emailCustomer).setCustomer(true);
+	}
+	
+	public boolean deleteCustomer(String username, String emailCustomer) {
+		User tempUser = getUser(username);
+		for(int i = 0; i < tempUser.getCustomers().size(); i++) {
+			if(tempUser.getCustomers().get(i).getEmail().equals(emailCustomer)) {
+				tempUser.getCustomers().remove(i);
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
+	public boolean deleteContact(String username, String emailCustomer, Contact contact) {
+		Customer tempCustomer = getCustomer(username, emailCustomer);
+		for(int i = 0; i < tempCustomer.getContacts().size(); i++) {
+			if(tempCustomer.getContacts().get(i).equals(contact)) {
+				tempCustomer.getContacts().remove(i);
+				return true;
+			}
+			
+		}
+		return false;
+	}
 }

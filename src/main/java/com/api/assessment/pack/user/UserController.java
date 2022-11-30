@@ -1,9 +1,13 @@
 package com.api.assessment.pack.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +33,24 @@ public class UserController {
 	public User getUser(@PathVariable String username) {
 		return userService.getUser(username);
 	}
+	@GetMapping("/api/users/{username}/opportunities")
+	public List<Customer> getOpportunities(@PathVariable String username){
+		return userService.getOpportunities(username);
+	}
 	
+	@GetMapping("/api/users/{username}/customers")
+	public List<Customer> getClients(@PathVariable String username){
+		return userService.getClients(username);
+	}
+	@PutMapping("/api/users/{username}/update/{emailCustomer}")
+	public boolean updateOpportunity(@PathVariable String username, @PathVariable String emailCustomer) {
+		userService.turnOpportunityIntoClient(username, emailCustomer);
+		return true;
+	}
+	@GetMapping("/api/users/{username}/{emailCustomer}")
+	public Customer getCustomer(@PathVariable String username, @PathVariable String emailCustomer) {
+		return userService.getCustomer(username, emailCustomer);	
+	}
 	@PostMapping(path="/api/users/{username}/{email}/add-contact")
 	public boolean addContact(@PathVariable String username, @PathVariable String email, @RequestBody Contact contact) {
 		if(userService.getUser(username) == null) {
@@ -52,5 +73,15 @@ public class UserController {
 		return true;
 	}
 	
+	
+	@DeleteMapping("/api/users/{username}/delete/{emailCustomer}")
+	public boolean deleteCustomer(@PathVariable String username, @PathVariable String emailCustomer) {
+		return userService.deleteCustomer(username, emailCustomer);
+	}
+	
+	@DeleteMapping("/api/users/{username}/delete-contact/{emailCustomer}")
+	public boolean deleteContact(@PathVariable String username, @PathVariable String emailCustomer, @RequestBody Contact contact) {
+		return userService.deleteContact(username, emailCustomer, contact);
+	}
 	
 }
