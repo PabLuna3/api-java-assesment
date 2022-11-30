@@ -28,5 +28,8 @@ public class Company {
 		this.position = position;
 	}
 	
+	public String toString() {
+		return "Company: " + name + ", " + position + " ";
+	}
 	
 }

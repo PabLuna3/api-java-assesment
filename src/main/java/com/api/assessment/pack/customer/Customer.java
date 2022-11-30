@@ -43,4 +43,44 @@ public class Customer {
 	public int numberOfContacts() {
 		return contacts.size();
 	}
+
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public boolean isCustomer() {
+		return isCustomer;
+	}
+
+	public void setCustomer(boolean isCustomer) {
+		this.isCustomer = isCustomer;
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", email=" + email + ", company=" + company + ", isCustomer=" + isCustomer
+				+ ", contacts=" + contacts + "]";
+	}
+	
 }

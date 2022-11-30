@@ -37,5 +37,7 @@ public class Contact {
 		this.description = description;
 	}
 	
-	
+	public String toString() {
+		return "Contacto : " + date + ", " + procedure + ", " + description; 
+	}
 }
