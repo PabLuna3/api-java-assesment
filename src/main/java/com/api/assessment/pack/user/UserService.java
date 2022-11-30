@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.api.assessment.pack.contact.Contact;
 import com.api.assessment.pack.customer.Customer;
 
 @Component
@@ -92,5 +93,21 @@ public class UserService {
 			if(users.get(i).getUsername().equals(userName)) return users.get(i);
 		}
 		return null;
+	}
+	
+	public boolean addContact(String username,String email,  String date, String procedure, String description) {
+		boolean flag = true;
+		if(date == null || date.isEmpty() || date.trim().isEmpty()) flag = false;
+		if(procedure == null || procedure.isEmpty() || procedure.trim().isEmpty()) flag = false;
+		
+		if(flag) {
+			List<Customer> customers = getCustomers(username);
+			for(int i = 0; i < customers.size(); i++) {
+				if(customers.get(i).getEmail().equals(email)) {
+					customers.get(i).getContacts().add(new Contact(date, procedure, description));
+				}
+			}
+		}
+		return flag;
 	}
 }
