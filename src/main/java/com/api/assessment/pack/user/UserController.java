@@ -1,22 +1,27 @@
 package com.api.assessment.pack.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.assessment.pack.contact.Contact;
 import com.api.assessment.pack.customer.Customer;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
 	private UserService userService; //= new UserService("pablo@solera", "haSvd12863tx");
@@ -26,9 +31,17 @@ public class UserController {
 	}
 	
 	@PostMapping("/api/login")
-	public boolean Login(String username, String password) {
+	public ResponseEntity<User> Login(@RequestBody User user) {
 		
-		return userService.ValidateLogin(username, password);
+		boolean flag = userService.ValidateLogin(user.getUsername(), user.getPassword());
+		if(flag) {
+			return new ResponseEntity <>(user, HttpStatus.OK);
+		}else {
+			return new ResponseEntity <>(HttpStatus.BAD_REQUEST);
+		}
+	
+		
+		
 	
 	}
 	@GetMapping("/api/users/{username}")
@@ -75,7 +88,6 @@ public class UserController {
 		userService.addCustomer(username, customer.getName(), customer.getEmail(), customer.getCompany().getName(),
 				customer.getCompany().getPosition(), customer.getContacts().get(0).getDate(), customer.getContacts().get(0).getProcedure(),
 				customer.getContacts().get(0).getDescription());
-		//System.out.println(customer);
 		return true;
 	}
 	

@@ -35,7 +35,6 @@ public class UserService {
 	public  boolean addCustomer(String userName, String name, String email, String nameCompany, String position, String date, String procedure,
 			String description) {
 		boolean flag = true;
-		//System.out.println("Hola desde crear usuario");
 		if(name == null || name.isEmpty() || name.trim().isEmpty()) flag = false;
 		if(email == null || email.isEmpty() || email.trim().isEmpty()) flag = false;
 		if(nameCompany == null || nameCompany.isEmpty() || nameCompany.trim().isEmpty()) flag = false;
@@ -100,11 +99,13 @@ public class UserService {
 		if(date == null || date.isEmpty() || date.trim().isEmpty()) flag = false;
 		if(procedure == null || procedure.isEmpty() || procedure.trim().isEmpty()) flag = false;
 		
-		Customer tempCustomer = getCustomer(username,email);
-		if(tempCustomer != null) {
-			tempCustomer.getContacts().add(new Contact(date, procedure, description));
-		}else {
-			flag = false;
+		if(flag) {
+			Customer tempCustomer = getCustomer(username,email);
+			if(tempCustomer != null) {
+				tempCustomer.getContacts().add(new Contact(date, procedure, description));
+			}else {
+				flag = false;
+			}
 		}
 		
 		return flag;
